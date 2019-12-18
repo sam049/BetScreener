@@ -38,10 +38,12 @@ function convertMoneyLine(Odds) {
 }
 
 const keyObj = {
-  'football/nfl': 'NFL',
-  'football/ncaa': 'NCAA Football',
-  'basketball/nba': 'NBA',
-  'basketball/ncaa': 'NCAA Basketball'
+  'https://200.cheapdatafeeds.com/api/json/odds-main/v1/football/nfl': 'NFL',
+  'https://201.cheapdatafeeds.com/api/json/odds-main/v1/football/ncaa':
+    'NCAA Football',
+  'https://203.cheapdatafeeds.com/api/json/odds-main/v1/basketball/nba': 'NBA',
+  'https://202.cheapdatafeeds.com/api/json/odds-main/v1/basketball/ncaa':
+    'NCAA Basketball'
 }
 
 // function filterResults(homeSpread, homeMoneyLine, overUnder) {

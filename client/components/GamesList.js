@@ -16,7 +16,6 @@ class GamesList extends React.Component {
 
   componentDidMount() {
     this.props.getGames()
-    // console.log(this.state)
   }
 
   handler(key) {
@@ -24,7 +23,6 @@ class GamesList extends React.Component {
   }
   stateSetter(params) {
     this.setState({params})
-    //       if (this.state.params) {console.log('XXXXXXXX', this.state.params) }
   }
 
   render() {

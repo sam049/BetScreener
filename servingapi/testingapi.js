@@ -2,7 +2,7 @@ const axios = require('axios')
 // api-key=2ca6b5ac698b2a3cfecf45204e3e9387
 async function test() {
   const {data} = await axios.get(
-    'https://cheapdatafeeds2.com/api/json/odds/v1/basketball/ncaa?api-key=2ca6b5ac698b2a3cfecf45204e3e9387'
+    'https://203.cheapdatafeeds.com/api/json/odds-main/v1/basketball/nba?api-key=1f996e202fe213a7c2f632129814f24f'
   )
   console.log(data.games[0])
   // console.log(data.data.data[0].sites[0].odds.spreads.odds)

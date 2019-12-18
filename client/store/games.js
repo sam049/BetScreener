@@ -9,13 +9,15 @@ const gotGames = games => ({type: GOT_GAMES, games})
 // const gotMoneyLines = games => ({type: GOT_MONEYLINES, games})
 const gotKey = key => ({type: GOT_KEY, key})
 
-const defaultSportKey = 'football/nfl'
+const defaultSportKey =
+  'https://200.cheapdatafeeds.com/api/json/odds-main/v1/football/nfl'
 const apiKey = process.env.API_KEY
 
 export const getGames = (key = defaultSportKey) => async dispatch => {
   try {
     const {data} = await axios.get(
-      `https://cheapdatafeeds2.com/api/json/odds/v1/${key}?api-key=${apiKey}`
+      `${key}?api-key=${apiKey}`
+      // 'https://200.cheapdatafeeds.com/api/json/odds-main/v1/football/nfl?api-key=1f996e202fe213a7c2f632129814f24f'
     )
     dispatch(gotGames(data))
     dispatch(gotKey(key))
@@ -23,18 +25,6 @@ export const getGames = (key = defaultSportKey) => async dispatch => {
     console.error(error)
   }
 }
-
-// export const getMoneyLines = (key = defaultSportKey) => async dispatch => {
-//   try {
-//     const {data} = await axios.get(
-//       `https://cheapdatafeeds2.com/api/json/odds/v1/football/nfl?api-key=${apiKey}`
-//     )
-//     dispatch(gotMoneyLines(data))
-//     dispatch(gotKey(key))
-//   } catch (error) {
-//     console.error(error)
-//   }
-// }
 
 const gamesState = {
   games: [],
