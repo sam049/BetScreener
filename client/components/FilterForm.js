@@ -19,7 +19,6 @@ export default class FilterForm extends React.Component {
     this.setState({
       [event.target.name]: event.target.value
     })
-    // this.props.stateSetter(this.state)
   }
 
   handleSubmit(event) {

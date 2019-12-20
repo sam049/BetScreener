@@ -18,9 +18,12 @@ class GamesList extends React.Component {
     this.props.getGames()
   }
 
+  //key passed up from DropdownList to fetch correct league data
   handler(key) {
     this.props.getGames(key)
   }
+
+  //user defined screener parameters passed up from FilterForm subcomponent
   stateSetter(params) {
     this.setState({params})
   }
@@ -50,10 +53,14 @@ class GamesList extends React.Component {
                     awayTeam={game[1].awayTeam}
                     start={game[1].startDate}
                     homeSpread={game[1].gameSpreadHomeHandicap}
+                    homeSpreadOdds={game[1].gameSpreadHomePriceUS}
                     awaySpread={game[1].gameSpreadAwayHandicap}
+                    awaySpreadOdds={game[1].gameSpreadAwayPriceUS}
                     homeMoneyLine={game[1].gameMoneylineHomePriceUS}
                     awayMoneyLine={game[1].gameMoneylineAwayPriceUS}
                     totalPoints={game[1].gameTotalPoints}
+                    overOdds={game[1].gameTotalOverPriceUS}
+                    underOdds={game[1].gameTotalUnderPriceUS}
                   />
                 </div>
               ) : null
