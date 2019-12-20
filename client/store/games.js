@@ -15,10 +15,7 @@ const apiKey = process.env.API_KEY
 
 export const getGames = (key = defaultSportKey) => async dispatch => {
   try {
-    const {data} = await axios.get(
-      `${key}?api-key=${apiKey}`
-      // 'https://200.cheapdatafeeds.com/api/json/odds-main/v1/football/nfl?api-key=1f996e202fe213a7c2f632129814f24f'
-    )
+    const {data} = await axios.get(`${key}?api-key=${apiKey}`)
     dispatch(gotGames(data))
     dispatch(gotKey(key))
   } catch (error) {
@@ -32,12 +29,9 @@ const gamesState = {
 }
 
 const gamesReducer = (state = gamesState, action) => {
-  //   console.log('action' + action)
   switch (action.type) {
     case GOT_GAMES:
       return {...state, games: action.games}
-    // case GOT_MONEYLINES:
-    //   return {...state, moneylineGames: action.games}
     case GOT_KEY:
       return {...state, sportKey: action.key}
     default:

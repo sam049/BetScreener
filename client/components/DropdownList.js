@@ -7,19 +7,12 @@ export default class DropdownList extends React.Component {
       listOpen: false
     }
     this.showList = this.showList.bind(this)
-    this.hideList = this.showList.bind(this)
   }
 
   showList(event) {
     event.preventDefault()
-    this.setState({listOpen: true}, () => {
-      document.addEventListener('click', this.hideList)
-    })
-  }
-
-  hideList() {
-    this.setState({listOpen: false}, () => {
-      document.addEventListener('click', this.hideList)
+    this.setState({listOpen: !this.state.listOpen}, () => {
+      console.log(this.state.listOpen)
     })
   }
 

@@ -29,12 +29,25 @@ function convertTimestamp(timestamp) {
   return time
 }
 
-function convertMoneyLine(Odds) {
-  if (Odds >= 2) {
-    return `+${((Odds - 1) * 100).toFixed(0)}`
-  } else {
-    return `${(-100 / (Odds - 1)).toFixed(0)}`
+function filterResults(homeSpread, homeMoneyLine, overUnder, props) {
+  let booleanVar = true
+
+  // if no filter parameters, we want to return true and render everything
+  if (!props) {
+    return true
   }
+
+  if (
+    parseFloat(homeSpread) > parseFloat(props.maxHomeSpread) ||
+    parseFloat(homeSpread) < parseFloat(props.minHomeSpread) ||
+    parseFloat(homeMoneyLine) > parseFloat(props.maxHomeMoneyLine) ||
+    parseFloat(homeMoneyLine) < parseFloat(props.minHomeMoneyLine) ||
+    parseFloat(overUnder) > parseFloat(props.maxOverUnder) ||
+    parseFloat(overUnder) < parseFloat(props.minOverUnder)
+  ) {
+    booleanVar = false
+  }
+  return booleanVar
 }
 
 const keyObj = {
@@ -46,26 +59,4 @@ const keyObj = {
     'NCAA Basketball'
 }
 
-// function filterResults(homeSpread, homeMoneyLine, overUnder) {
-//   console.log(homeSpread)
-//   if (this.props.params) {
-//     console.log('returning true')
-//     return true
-//   }
-//   console.log('made it to the function', this.props.params)
-//   let paramsArray = [homeSpread, homeMoneyLine, overUnder]
-//   for (let i = 0; i < paramsArray.length; i++) {
-//     if (paramsArray[i] === undefined) {
-//       paramsArray[i] = this.props.params[paramsArray[i]]
-//     }
-//   }
-//   let booleanVar = true
-//   if (homeSpread > this.props.params.maxHomeSpread || homeSpread < this.props.params.minHomeSpread ||
-//       homeMoneyLine > this.props.params.maxHomeMoneyLine || homeMoneyLine < this.props.params.minHomeMoneyLine ||
-//       overUnder > this.props.params.maxOverUnder || overUnder < this.props.params.minOverUnder) {
-//         booleanVar = false
-//     }
-//   return booleanVar
-// }
-
-module.exports = {convertTimestamp, convertMoneyLine, keyObj, convertToUnix}
+module.exports = {convertTimestamp, keyObj, convertToUnix, filterResults}
