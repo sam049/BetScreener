@@ -1,9 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getGames} from '../store/games'
-import SingleGame from './SingleGame'
+import SingleGame from './SingleGame/SingleGame'
 import DropdownList from './DropdownList'
 import FilterForm from './FilterForm'
+import {Grid} from 'semantic-ui-react'
 import {keyObj, convertToUnix} from '../../util'
 
 class GamesList extends React.Component {
@@ -16,15 +17,16 @@ class GamesList extends React.Component {
 
   componentDidMount() {
     this.props.getGames()
-    // console.log(this.state)
   }
 
+  //key passed up from DropdownList to fetch correct league data
   handler(key) {
     this.props.getGames(key)
   }
+
+  //user defined screener parameters passed up from FilterForm subcomponent
   stateSetter(params) {
     this.setState({params})
-    //       if (this.state.params) {console.log('XXXXXXXX', this.state.params) }
   }
 
   render() {
@@ -39,27 +41,35 @@ class GamesList extends React.Component {
           <h1>{keyObj[sportKey]}</h1>
           <DropdownList handler={this.handler} />
           <FilterForm stateSetter={this.stateSetter} />
-          {gamesArray.map(
-            (game, index) =>
-              game[1].homeTeam != 'Will Be available for all games' &&
-              Date.now()
-                .toString()
-                .slice(0, -3) < convertToUnix(game[1].startDate) ? (
-                <div key={index}>
-                  <SingleGame
-                    params={this.state.params}
-                    homeTeam={game[1].homeTeam}
-                    awayTeam={game[1].awayTeam}
-                    start={game[1].startDate}
-                    homeSpread={game[1].gameSpreadHomeHandicap}
-                    awaySpread={game[1].gameSpreadAwayHandicap}
-                    homeMoneyLine={game[1].gameMoneylineHomePriceUS}
-                    awayMoneyLine={game[1].gameMoneylineAwayPriceUS}
-                    totalPoints={game[1].gameTotalPoints}
-                  />
-                </div>
-              ) : null
-          )}
+          <div>
+            <Grid columns="four">
+              {gamesArray.map(
+                (game, index) =>
+                  game[1].homeTeam != 'Will Be available for all games' &&
+                  Date.now()
+                    .toString()
+                    .slice(0, -3) < convertToUnix(game[1].startDate) ? (
+                    <div key={index}>
+                      <SingleGame
+                        params={this.state.params}
+                        homeTeam={game[1].homeTeam}
+                        awayTeam={game[1].awayTeam}
+                        start={game[1].startDate}
+                        homeSpread={game[1].gameSpreadHomeHandicap}
+                        homeSpreadOdds={game[1].gameSpreadHomePriceUS}
+                        awaySpread={game[1].gameSpreadAwayHandicap}
+                        awaySpreadOdds={game[1].gameSpreadAwayPriceUS}
+                        homeMoneyLine={game[1].gameMoneylineHomePriceUS}
+                        awayMoneyLine={game[1].gameMoneylineAwayPriceUS}
+                        totalPoints={game[1].gameTotalPoints}
+                        overOdds={game[1].gameTotalOverPriceUS}
+                        underOdds={game[1].gameTotalUnderPriceUS}
+                      />
+                    </div>
+                  ) : null
+              )}
+            </Grid>
+          </div>
         </div>
       )
     }

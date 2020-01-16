@@ -19,7 +19,6 @@ export default class FilterForm extends React.Component {
     this.setState({
       [event.target.name]: event.target.value
     })
-    // this.props.stateSetter(this.state)
   }
 
   handleSubmit(event) {
@@ -31,7 +30,7 @@ export default class FilterForm extends React.Component {
     return (
       <form>
         <label>
-          Max Home Spread
+          Maximum Home Spread
           <input
             type="integer"
             name="maxHomeSpread"
@@ -51,7 +50,7 @@ export default class FilterForm extends React.Component {
         </label>
 
         <label>
-          Max Home MoneyLine
+          Maximum Home MoneyLine
           <input
             type="integer"
             name="maxHomeMoneyLine"
