@@ -50,6 +50,28 @@ function filterResults(homeSpread, homeMoneyLine, overUnder, props) {
   return booleanVar
 }
 
+function getSeason() {
+  let sportArray = []
+  let date = new Date()
+  const month = date.getMonth()
+  const day = date.getDate()
+  if (month >= 8 || month === 0 || month === 1) {
+    sportArray.push('NFL')
+  }
+  if (month >= 7 || (month === 0 && day <= 13)) {
+    sportArray.push('NCAAF')
+  }
+  if (month >= 9 || month <= 5) {
+    sportArray.push('NBA')
+  }
+  if (month >= 9 || month <= 3) {
+    sportArray.push('NCAABB')
+  }
+  // console.log(sportArray)
+  return sportArray
+}
+getSeason()
+
 const keyObj = {
   'https://200.cheapdatafeeds.com/api/json/odds-main/v1/football/nfl': 'NFL',
   'https://201.cheapdatafeeds.com/api/json/odds-main/v1/football/ncaa':
@@ -59,4 +81,10 @@ const keyObj = {
     'NCAA Basketball'
 }
 
-module.exports = {convertTimestamp, keyObj, convertToUnix, filterResults}
+module.exports = {
+  convertTimestamp,
+  keyObj,
+  convertToUnix,
+  filterResults,
+  getSeason
+}
